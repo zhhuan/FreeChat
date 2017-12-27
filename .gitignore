@@ -1,0 +1,7 @@
+###FreeTalk Files###
+
+# app-client/
+app-client/node_modules
+app-client/package-lock.json
+
+

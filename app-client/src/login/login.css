@@ -1,0 +1,36 @@
+.icon {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	fill: currentColor;
+}
+
+.page-login {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.login-tip-pic {
+	text-align: center;
+}
+
+.login-tip-text {
+	margin-top: 2rem;
+	text-align: center;
+}
+
+.logo-pic {
+	width: 6rem;
+}
+
+.login-body {
+	margin: 0 12rem;
+}
+
+.login-field {
+	margin-top: 1rem;
+}
+
+input {
+	padding: 0.3rem;
+}

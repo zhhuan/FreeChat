@@ -1,0 +1,17 @@
+{
+  "name": "free-chat",
+  "version": "1.0.0",
+  "description": "FreeChat web client,help people talk whatever they want.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zhongh",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "socket.io": "^2.0.4"
+  }
+}
