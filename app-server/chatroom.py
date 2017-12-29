@@ -11,7 +11,7 @@ socketio = SocketIO(app, async_mode=async_mode)
 
 @app.route('/')
 def index():
-	return render_template('login.html')
+	return app.send_static_file('../app-client/dist/index.html')
 
 
 @socketio.on('connect',namespace='/chatroom')
