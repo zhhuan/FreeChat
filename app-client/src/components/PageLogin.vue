@@ -22,8 +22,28 @@
 				<input type="password" name="password" placeholder="请输入您的密码...">
 			</div>
 		</div>
+		<div class="login-foot">
+			<button id="login-btn" v-on:click="loginChatroom">登陆</button>
+			<button id="register-btn" v-on:click="jumpRegister">注册</button>
+		</div>
 	</div>
 </template>
+
+<script>
+	export default {
+		data: function () {
+			return 
+		},
+		methods: {
+			loginChatroom: function () {
+				this.$emit('change','chat-room')
+			},
+			jumpRegister: function () {
+				this.$emit('change','page-register')
+			}
+		}
+	}
+</script>
 
 <style>
 	.icon {
@@ -56,7 +76,15 @@
 	}
 
 	.login-field {
+		display: flex;
 		margin-top: 1rem;
+		justify-content: center;
+	}
+
+	.login-foot {
+		display: flex;
+		justify-content: center;
+		margin: 1rem;
 	}
 
 	input {

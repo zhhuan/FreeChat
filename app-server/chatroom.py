@@ -5,13 +5,13 @@ from flask_socketio import SocketIO, emit, join_room, leave_room, \
 
 async_mode = None
 
-app = Flask(__name__)
+app = Flask(__name__,static_url_path='',static_folder='../app-client/dist')
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, async_mode=async_mode)
 
 @app.route('/')
 def index():
-	return app.send_static_file('../app-client/dist/index.html')
+	return app.send_static_file('index.html')
 
 
 @socketio.on('connect',namespace='/chatroom')
