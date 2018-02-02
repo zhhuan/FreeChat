@@ -10,16 +10,22 @@
 		</div>
 		<div class="login-body">
 			<div class="login-field">
-				<svg class="icon">
-					<use xlink:href="../images/icons.svg#icon-truck"/>
-				</svg>
-				<input type="text" name="username" placeholder="请输入您的账号...">
+				<div>
+					<svg class="icon">
+						<use xlink:href="../images/icons.svg#icon-truck"/>
+					</svg>
+					<input type="text" placeholder="请输入您的账号..." v-on:blur="validatorUser" v-model="username">
+				</div>
+				<div v-bind:class="[{ hide: isHide },tipClass]">账户名不存在</div>
 			</div>
 			<div class="login-field">
-				<svg class="icon">
-					<use xlink:href="../images/icons.svg#icon-alarm"/>
-				</svg>
-				<input type="password" name="password" placeholder="请输入您的密码...">
+				<div>
+					<svg class="icon">
+						<use xlink:href="../images/icons.svg#icon-alarm"/>
+					</svg>
+					<input type="password"  placeholder="请输入您的密码..." v-model="password">
+				</div>
+				<div v-bind:class="[{ pwdHide: pwdHide },tipClass]">密码输入错误</div>
 			</div>
 		</div>
 		<div class="login-foot">
@@ -30,16 +36,55 @@
 </template>
 
 <script>
+	import io from 'socket.io-client'
+
+	var namespace = '/validator'
+	var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace)
+
+	// socket.on('exist_user',function(msg){
+	// 	let user_exist = msg['data']
+	// 	if(!user_exist){
+	// 		this.isHide = false
+	// 	}
+	// })
 	export default {
 		data: function () {
-			return 
+			return {
+				username: '',
+				password: '',
+				isHide: true,
+				pwdHide: true,
+				tipClass: 'errorTip'
+			}
 		},
 		methods: {
 			loginChatroom: function () {
-				this.$emit('change','chat-room')
+				let self = this
+				socket.emit('login_room', {username:self.username,password:self.password})
+				socket.on('login_done', function(msg){
+					let check_done = msg['data']
+					if(check_done){
+						self.$emit('change','chat-room')
+					}else{
+						self.pwdHide = false
+					}
+				})
+				
 			},
 			jumpRegister: function () {
 				this.$emit('change','page-register')
+			},
+			validatorUser: function() {
+				let self = this
+				socket.emit('validator_user',{data:self.username})
+				socket.on('exist_user',function(msg){
+					let user_exist = msg['data']
+					if(!user_exist){
+						self.isHide = false
+					}else{
+						self.isHide = true
+					}
+				})
 			}
 		}
 	}
@@ -79,6 +124,8 @@
 		display: flex;
 		margin-top: 1rem;
 		justify-content: center;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.login-foot {
@@ -87,8 +134,16 @@
 		margin: 1rem;
 	}
 
+	.hide,.pwdHide {
+		display: none;
+	}
 	input {
 		padding: 0.3rem;
+	}
+
+	.errorTip {
+		font-size: 0.9rem;
+    	color: red;
 	}
 </style>
 

@@ -4,7 +4,8 @@ module.exports = {
 	entry: './src/main.js',
 	output: {
 		filename: 'bundle.js',
-		path: path.resolve(__dirname,'dist')
+		path: path.resolve(__dirname,'dist'),
+		publicPath: 'http://localhost:8088/js'
 	},
 	module: {
 		rules: [
@@ -54,5 +55,6 @@ module.exports = {
 		host: '0.0.0.0',
 		contentBase: path.resolve(__dirname, 'dist'),
 		port: 8088
-	}
+	},
+	devtool: 'inline-source-map'
 };
