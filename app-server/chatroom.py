@@ -89,4 +89,5 @@ def register_user(msg):
 		print('done')
 
 if __name__ == '__main__':
-	socketio.run(app,host='192.168.0.189',port=10000)
+	# socketio.run(app,host='192.168.0.189',port=10000)
+	socketio.run(app, debug=True)
