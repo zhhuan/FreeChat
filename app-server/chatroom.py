@@ -36,11 +36,10 @@ def validator_user(msg):
 	username = msg['data']
 	try:
 		with connection.cursor() as cursor:
-			sql = "SELECT `chat_user` FROM `dat_user`"
-			cursor.execute(sql)
+			sql = "SELECT `chat_user` FROM `dat_user` WHERE `chat_user` = %s"
+			cursor.execute(sql, (username))
 			result = cursor.fetchone()
-			print(username,result)
-			if username in result:
+			if result:
 				emit('exist_user',{'data':1})
 			else:
 				emit('exist_user',{'data':0})
@@ -58,9 +57,8 @@ def login_room(msg):
 	try: 
 		with connection.cursor() as cursor:
 			sql = "SELECT `chat_pwd` FROM `dat_user` WHERE `chat_user` = %s"
-			cursor.execute(sql, (username,))
+			cursor.execute(sql, (username))
 			result = cursor.fetchone()
-			print(password,result)
 			if password in result:
 				emit('login_done',{'data':1})
 			else:
@@ -77,7 +75,7 @@ def register_user(msg):
 	try:
 		with connection.cursor() as cursor:
 			sql = "INSERT INTO `dat_user`(`chat_user`,`chat_pwd`,`chat_email`) VALUES (%s,%s,%s)"
-			cursor.execute(sql,(user,password,email,))
+			cursor.execute(sql,(user,password,email))
 		
 		connection.commit()
 	except IntegrityError as e:

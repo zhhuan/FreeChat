@@ -137,6 +137,7 @@
 	.hide,.pwdHide {
 		display: none;
 	}
+	
 	input {
 		padding: 0.3rem;
 	}
