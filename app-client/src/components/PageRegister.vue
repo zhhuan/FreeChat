@@ -39,20 +39,21 @@
                 fieldClass: 'duplicate-tip'
             }
         },
+        created: function() {
+            socket.on('register_done',function(msg){
+                let self = this
+                let register_result = msg['data']
+                if(register_result){
+                    self.$emit('change','page-login')
+                }else{
+                    self.isHide = false
+                }
+            })
+        },
         methods: {
             registerUser: function(){
-                let self = this
-                if(self.reUser && self.rePwd && self.reEmail){
-                    socket.emit('register_user',{user:self.reUser,pwd:self.rePwd,email:self.reEmail})
-                    socket.on('register_done',function(msg){
-                        let register_result = msg['data']
-                        if(register_result){
-                            self.$emit('change','page-login')
-                        }else{
-                            self.isHide = false
-                        }
-                    })
-                    
+                if(this.reUser && this.rePwd && this.reEmail){
+                    socket.emit('register_user',{user:this.reUser,pwd:this.rePwd,email:this.reEmail})
                 }else{
                     alert('please complete register msg')
                 }

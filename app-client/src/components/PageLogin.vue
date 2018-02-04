@@ -57,34 +57,34 @@
 				tipClass: 'errorTip'
 			}
 		},
+		created: function() {
+			let self = this
+			socket.on('login_done', function(msg){
+				let check_done = msg['data']
+				if(check_done){
+					self.$emit('change','chat-room')
+				}else{
+					self.pwdHide = false
+				}
+			})
+			socket.on('exist_user',function(msg){
+				let user_exist = msg['data']
+				if(!user_exist){
+					self.isHide = false
+				}else{
+					self.isHide = true
+				}
+			})
+		},
 		methods: {
 			loginChatroom: function () {
-				let self = this
-				socket.emit('login_room', {username:self.username,password:self.password})
-				socket.on('login_done', function(msg){
-					let check_done = msg['data']
-					if(check_done){
-						self.$emit('change','chat-room')
-					}else{
-						self.pwdHide = false
-					}
-				})
-				
+				socket.emit('login_room', {username:this.username,password:this.password})
 			},
 			jumpRegister: function () {
 				this.$emit('change','page-register')
 			},
 			validatorUser: function() {
-				let self = this
-				socket.emit('validator_user',{data:self.username})
-				socket.on('exist_user',function(msg){
-					let user_exist = msg['data']
-					if(!user_exist){
-						self.isHide = false
-					}else{
-						self.isHide = true
-					}
-				})
+				socket.emit('validator_user',{data:this.username})
 			}
 		}
 	}
