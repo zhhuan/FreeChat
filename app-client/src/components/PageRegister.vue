@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div id="register-tip">
-                <span v-bind:class="[{ hide: isHide },fieldClass]">帐户名已存在</span>
+                <span v-bind:class="[{ reHide: isHide },fieldClass]">帐户名已存在</span>
             </div>
         </div>
         <div id="register-foot">
@@ -41,8 +41,8 @@
             }
         },
         created: function() {
+            let self = this
             socket.on('register_done',function(msg){
-                let self = this
                 let register_result = msg['data']
                 if(register_result){
                     router.push({name:'login'})
@@ -95,7 +95,7 @@
         margin-top: 1rem;
     }
 
-    .hide {
+    .reHide {
         display: none;
     }
 
