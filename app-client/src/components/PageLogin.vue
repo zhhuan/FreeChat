@@ -37,6 +37,7 @@
 
 <script>
 	import io from 'socket.io-client'
+	import { router } from '../util/util.js'
 
 	var namespace = '/validator'
 	var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace)
@@ -62,7 +63,8 @@
 			socket.on('login_done', function(msg){
 				let check_done = msg['data']
 				if(check_done){
-					self.$emit('change','chat-room')
+					router.push({ name:'chatroom', params:{ username:msg['username'] }})
+					// self.$emit('change','chat-room')
 				}else{
 					self.pwdHide = false
 				}
@@ -81,7 +83,8 @@
 				socket.emit('login_room', {username:this.username,password:this.password})
 			},
 			jumpRegister: function () {
-				this.$emit('change','page-register')
+				router.push({ name:'register' })
+				// this.$emit('change','page-register')
 			},
 			validatorUser: function() {
 				socket.emit('validator_user',{data:this.username})

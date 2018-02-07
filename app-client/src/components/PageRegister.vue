@@ -25,7 +25,8 @@
 
 <script>
     import io from 'socket.io-client'
-
+    import {router} from '../util/util.js'
+    
     var namespace = '/register'
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace)
 
@@ -44,7 +45,7 @@
                 let self = this
                 let register_result = msg['data']
                 if(register_result){
-                    self.$emit('change','page-login')
+                    router.push({name:'login'})
                 }else{
                     self.isHide = false
                 }

@@ -1,7 +1,9 @@
 ###FreeTalk Files###
 
 # app-client/
-app-client/dist/*
+app-client/dist/bundle.js
+app-client/dist/favicon/*
+app-client/dist/images/*
 app-client/node_modules
 app-client/package-lock.json
 .vscode/*

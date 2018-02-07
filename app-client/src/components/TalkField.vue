@@ -22,5 +22,13 @@
 <style>
     .talk-field {
         display: flex;
+        margin-bottom: 1rem;
     }
+
+    .avator-default {
+        width: 2.5rem;
+        border-radius: 0.5rem;
+        margin-right: 1.5rem;
+    }
+
 </style>

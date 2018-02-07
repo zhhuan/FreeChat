@@ -7,7 +7,8 @@
 			</ul>
 		</div>
 		<div id="writeZone">
-			<input v-model="sendMsg" type="text" name="myTalk">
+			<img class="avator-default" src="/favicon/default.png">
+			<input class="myTalk" v-model="sendMsg" type="text" placeholder="click here to type message">
 			<button v-on:click="sendTalk">Send</button>
 		</div>
 	</div>
@@ -20,12 +21,6 @@
 	var namespace = '/chatroom'
 	var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace)
 	
-	// socket.on('pub_msg',function(msg){
-	// 	var chatRecords = document.getElementById('chatRecords')
-	// 	var wordHtml = '<li class="msg">'+msg.data+'</li>'
-	// 	chatRecords.insertAdjacentHTML('beforeEnd',wordHtml)
-	// })
-	
 	export default {
 		data: function(){
 			return {
@@ -37,14 +32,14 @@
 			let self = this
 			socket.on('pub_msg', function(msg) {
 				self.conversations.push({
-					role: 'zhongh',
+					role: msg.role,
 					word: msg.data
 				})
 			})
 		},
 		methods: {
 			sendTalk: function() {
-				socket.emit('send_msg',{data:this.sendMsg})
+				socket.emit('send_msg',{data:this.sendMsg,role:this.$route.params.username})
 			}
 		},
 		components: {
@@ -66,8 +61,23 @@
 	}
 
 	#writeZone {
-		width: 20rem;
+		display: flex;
+		width: 40rem;
+		border: 1px solid black;
 		margin: 0 auto;
+	}
+
+	.avator-default {
+        width: 2.5rem;
+		height: 100%;
+        border-radius: 0.5rem;
+		margin-left: 1.5rem;
+        margin-right: 1.5rem;
+    }
+
+	.myTalk {
+		width: 30rem;
+    	border: none;
 	}
 
 	.msg {

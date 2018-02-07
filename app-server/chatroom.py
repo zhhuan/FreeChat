@@ -29,7 +29,7 @@ def test_connect():
 
 @socketio.on('send_msg', namespace='/chatroom')
 def test_message(message):
-	emit('pub_msg',{'data':message['data']},broadcast=True)
+	emit('pub_msg',{'data':message['data'],'role':message['role']},broadcast=True)
 
 @socketio.on('validator_user', namespace='/validator')
 def validator_user(msg):
@@ -60,7 +60,7 @@ def login_room(msg):
 			cursor.execute(sql, (username))
 			result = cursor.fetchone()
 			if password in result:
-				emit('login_done',{'data':1})
+				emit('login_done',{'data':1,'username':username,'password':password})
 			else:
 				emit('login_done',{'data':0})
 	finally:

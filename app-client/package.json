@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "socket.io": "^2.0.4",
-    "vue": "^2.5.13"
+    "vue": "^2.5.13",
+    "vue-router": "^3.0.1"
   }
 }
