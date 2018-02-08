@@ -2,27 +2,23 @@
 	<div class="page-login">
 		<div class="login-head">
 			<div class="login-tip-pic">
-				<img class="logo-pic" src="../images/login.png">
+				<h2 class="login-logo">Login Logo</h2>
 			</div>
 			<div class="login-tip-text">
-				<span>Log in to Free Talk</span>
+				<span>Log in</span>
 			</div>
 		</div>
 		<div class="login-body">
 			<div class="login-field">
 				<div>
-					<svg class="icon">
-						<use xlink:href="../images/icons.svg#icon-truck"/>
-					</svg>
+					<h3 class="login-label">Username</h3>
 					<input type="text" placeholder="请输入您的账号..." v-on:blur="validatorUser" v-model="username">
 				</div>
 				<div v-bind:class="[{ hide: isHide },tipClass]">账户名不存在</div>
 			</div>
 			<div class="login-field">
 				<div>
-					<svg class="icon">
-						<use xlink:href="../images/icons.svg#icon-alarm"/>
-					</svg>
+					<h3 class="login-label">Password</h3>
 					<input type="password"  placeholder="请输入您的密码..." v-model="password">
 				</div>
 				<div v-bind:class="[{ pwdHide: pwdHide },tipClass]">密码输入错误</div>
@@ -42,12 +38,6 @@
 	var namespace = '/validator'
 	var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace)
 
-	// socket.on('exist_user',function(msg){
-	// 	let user_exist = msg['data']
-	// 	if(!user_exist){
-	// 		this.isHide = false
-	// 	}
-	// })
 	export default {
 		data: function () {
 			return {
@@ -102,21 +92,29 @@
 	}
 
 	.page-login {
-		width: 50%;
+		height: 100%;
 		margin: 0 auto;
+		background: #252527 url(/images/fillfeature.png);
 	}
 
-	.login-tip-pic {
-		text-align: center;
+	.login-head {
+		display: flex;
+		justify-content: center;
+	}
+
+	.login-logo {
+		width: 3rem;
+		height: 3rem;
+		font: 0/0 a;
+		background: url(/images/login.png) no-repeat;
+    	background-size: 3rem 3rem; 
+    	opacity: 0.5;
 	}
 
 	.login-tip-text {
-		margin-top: 2rem;
-		text-align: center;
-	}
-
-	.logo-pic {
-		width: 6rem;
+		padding-right: 8rem;
+		font-size: 2.5rem;
+		color: white;
 	}
 
 	.login-body {
@@ -131,6 +129,10 @@
 		align-items: center;
 	}
 
+	.login-label {
+		color: #999;
+	}
+
 	.login-foot {
 		display: flex;
 		justify-content: center;
@@ -142,7 +144,22 @@
 	}
 	
 	input {
-		padding: 0.3rem;
+		padding: 1rem;
+		border-radius: 0.5rem;
+		font-size: 1.3rem;
+	}
+
+	button {
+		padding: 10px 16px;
+		border-radius: 3px;
+		border: 3px solid transparent;
+		outline: 0;
+		margin: 0 10px 0 0;
+		font-size: 1rem;
+		line-height: 1.2;
+		color: white;
+		background: #47cf73;
+		cursor: pointer;
 	}
 
 	.errorTip {

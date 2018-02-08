@@ -7,7 +7,7 @@
 			</ul>
 		</div>
 		<div id="writeZone">
-			<img class="avator-default" src="/favicon/default.png">
+			<!-- <img class="avator-default" src="/favicon/default.png"> -->
 			<input class="myTalk" v-model="sendMsg" type="text" placeholder="click here to type message">
 			<button v-on:click="sendTalk">Send</button>
 		</div>
