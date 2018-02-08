@@ -64,7 +64,20 @@
 		display: flex;
 		width: 40rem;
 		border: 1px solid black;
-		margin: 0 auto;
+		margin: 0 auto;	
+	}
+
+	@media screen and (max-width: 769px){
+		#chatContent {
+			width: 23rem;
+		}
+		#writeZone {
+			width: 23rem;
+		}
+
+		input {
+			font-size: 0.9rem;
+		}
 	}
 
 	.avator-default {
@@ -76,7 +89,7 @@
     }
 
 	.myTalk {
-		width: 30rem;
+		width: 100%;
     	border: none;
 	}
 

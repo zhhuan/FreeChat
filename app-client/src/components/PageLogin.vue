@@ -154,7 +154,6 @@
 		border-radius: 3px;
 		border: 3px solid transparent;
 		outline: 0;
-		margin: 0 10px 0 0;
 		font-size: 1rem;
 		line-height: 1.2;
 		color: white;
@@ -162,7 +161,11 @@
 		cursor: pointer;
 	}
 
+	.login-foot button{
+		margin: 0 10px 0 0;
+	}
 	.errorTip {
+		width: 6rem;
 		font-size: 0.9rem;
     	color: red;
 	}
